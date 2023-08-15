@@ -1,0 +1,15 @@
+{
+    "question": {
+        "title": true,
+        "answer": true,
+        "status": true,
+        "category_id": true
+    },
+    "category": {
+        "category_name": true
+    },
+    "question_category": {
+        "question_id": true,
+        "category_id": true
+    }
+}

@@ -1,0 +1,51 @@
+type Query {
+  allCategories: [Category] @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\AllCategories")
+  allQuestions: [Question] @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\AllQuestions")
+}
+
+type Mutation {
+  createCategory(input: CreateCategoryInput!): String @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\CreateCategory")
+  updateCategory(input: UpdateCategoryInput!): String @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\UpdateCategory")
+  deleteCategory(id: Int!): String @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\DeleteCategory")
+  createQuestion(input: CreateQuestionInput!): String @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\CreateQuestion")
+  updateQuestion(input: UpdateQuestionInput!): String @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\UpdateQuestion")
+  deleteQuestion(id: Int!): String @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\DeleteQuestion")
+  bulkDeleteQuestions(ids: [Int!]!): String @resolver(class: "Tasks\\FAQs\\Model\\Resolver\\BulkDeleteQuestions")
+}
+
+type Category {
+  category_id: Int!
+  category_name: String!
+}
+
+input CreateCategoryInput {
+  category_name: String!
+}
+
+input UpdateCategoryInput {
+    id: Int!
+    new_category: String!
+}
+
+type Question {
+  question_id: Int!
+  title: String!
+  answer: String!
+  status: Boolean!
+  category_id: Int!
+}
+
+input CreateQuestionInput {
+  title: String!
+  answer: String!
+  status: Boolean!
+  category_id: Int!
+}
+
+input UpdateQuestionInput {
+  id: Int!
+  title: String!
+  answer: String!
+  status: Boolean!
+  category_id: Int!
+}

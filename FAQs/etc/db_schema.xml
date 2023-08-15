@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="question" resource="default" engine="innodb" comment="FAQ Questions">
+        <column xsi:type="smallint" name="question_id" padding="6" unsigned="true" nullable="false" comment="Question ID" identity="true" />
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title" />
+        <column xsi:type="text" name="answer" nullable="false" comment="Answer" />
+        <column xsi:type="boolean" name="status" nullable="false" comment="Status" />
+        <column xsi:type="smallint" name="category_id" padding="6" unsigned="true" nullable="false" comment="Category ID" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="question_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="QUESTION_CATEGORY_FK" table="question" column="category_id" referenceTable="category" referenceColumn="category_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="category" resource="default" engine="innodb" comment="FAQ Categories">
+        <column xsi:type="smallint" name="category_id" padding="6" unsigned="true" nullable="false" comment="Category ID" identity="true" />
+        <column xsi:type="varchar" name="category_name" nullable="false" length="255" comment="Category Name" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id" />
+        </constraint>
+    </table>
+
+    <table name="question_category" resource="default" engine="innodb" comment="FAQ Question-Category Association">
+        <column xsi:type="smallint" name="question_id" padding="6" unsigned="true" nullable="false" comment="Question ID" />
+        <column xsi:type="smallint" name="category_id" padding="6" unsigned="true" nullable="false" comment="Category ID" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="question_id" />
+            <column name="category_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="QC_QUESTION_ID_QUESTION_QUESTION_ID" table="question_category" column="question_id" referenceTable="question" referenceColumn="question_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="QC_CATEGORY_ID_CATEGORY_CATEGORY_ID" table="question_category" column="category_id" referenceTable="category" referenceColumn="category_id" onDelete="CASCADE"/>
+    </table>
+</schema>
